@@ -6,108 +6,54 @@
   <title>Acesso Liberado - Grupo Urca Energia</title>
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="shortcut icon" href="logo.png" type="image/png" />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
+      display: flex; justify-content: center; align-items: center;
+      overflow: hidden; position: relative;
     }
 
     video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; object-fit: cover; z-index: 1;
     }
 
     .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 2;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.3); z-index: 2;
     }
 
     .message-box {
-      position: relative;
-      z-index: 3;
-      background: white;
-      padding: 40px 30px;
-      border-radius: 14px;
+      position: relative; z-index: 3;
+      background: white; max-width: 480px;
+      padding: 40px 30px; border-radius: 14px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-      max-width: 480px;
-      text-align: center;
-      color: #1a1a1a;
+      text-align: center; color: #1a1a1a;
     }
 
-    .logo {
-      max-width: 150px;
-      margin: 0 auto 20px;
-      display: block;
-    }
-
-    h1 {
-      color: #003d82;
-      margin-bottom: 20px;
-      font-size: 2rem;
-    }
-
-    p {
-      font-size: 1.15rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
-      color: #2a2a2a;
-    }
+    .logo { max-width: 150px; margin: 0 auto 20px; display: block; }
+    h1 { color: #003d82; margin-bottom: 20px; font-size: 2rem; }
+    p { font-size: 1.15rem; margin-bottom: 10px; color: #2a2a2a; }
 
     .loader {
       border: 6px solid #f3f3f3;
       border-top: 6px solid #FF8C00;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       animation: spin 1s linear infinite;
       margin: 20px auto 0;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 520px) {
-      .message-box {
-        padding: 30px 25px;
-      }
-      h1 {
-        font-size: 1.6rem;
-      }
-      p {
-        font-size: 1rem;
-      }
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
+
   <video autoplay muted loop playsinline>
     <source src="background-video.mp4" type="video/mp4" />
   </video>
@@ -115,26 +61,30 @@
   <div class="overlay"></div>
 
   <div class="message-box">
-    <img src="logo.png" alt="Logo Grupo Urca Energia" class="logo" />
+    <img src="logo.png" class="logo" />
     <h1>Acesso Liberado</h1>
     <p>Você finalizou o preenchimento com sucesso.</p>
-    <p>Em instantes você será redirecionado e seu acesso será liberado automaticamente.</p>
+    <p>Estamos validando seu acesso...</p>
     <div class="loader"></div>
   </div>
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
+
       const baseGrantUrl = params.get("base_grant_url");
-      const continueUrl = params.get("user_continue_url") || "https://urcaenergia.com/?gad_source=1&gad_campaignid=20691310054&gbraid=0AAAAAqUTcTlGvsd9Mqq6hoQsOdk2RQk74&gclid=Cj0KCQiArt_JBhCTARIsADQZaykOwtPUBqysq9JLI2WPstF5DnqQ2Gxd06IIAdw7G6s_Si5YoxB-83IaAt4FEALw_wcB";
+      const continueUrl = params.get("user_continue_url") 
+                          || "https://urcaenergia.com";
 
       setTimeout(() => {
         if (baseGrantUrl) {
+          // Redirecionamento padrão de captive portal
           window.location.href = `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
         } else {
+          // Fallback caso esteja fora do ambiente de autenticação
           window.location.href = continueUrl;
         }
-      }, 10000);
+      }, 10000); // 10 segundos
     });
   </script>
 </body>
