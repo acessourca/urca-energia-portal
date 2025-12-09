@@ -28,6 +28,7 @@
       overflow: hidden;
     }
 
+    /* Vídeo de fundo igual ao index */
     video {
       position: fixed;
       top: 0;
@@ -38,29 +39,28 @@
       z-index: 1;
     }
 
-    /* IGUAL AO INDEX */
     .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.1); /* IGUAL AO INDEX */
+      background: rgba(0, 0, 0, 0.1);
       z-index: 2;
     }
 
-    /* IGUAL AO INDEX */
+    /* Caixa com a mesma opacidade do index */
     .message-box {
       position: relative;
       z-index: 3;
-      background: rgba(255, 255, 255, 0.2); /* MESMA OPACIDADE */
-      backdrop-filter: blur(6px);           /* MESMO BLUR */
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.2); /* igual ao index */
+      backdrop-filter: blur(6px);           /* igual ao index */
       padding: 40px 30px;
+      border-radius: 14px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
       max-width: 480px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* idêntico ao index */
       color: #1a1a1a;
     }
 
@@ -84,6 +84,7 @@
       margin-bottom: 10px;
     }
 
+    /* Loader igual estilo Urca */
     .loader {
       border: 6px solid rgba(255, 255, 255, 0.3);
       border-top: 6px solid #FF8C00;
@@ -109,7 +110,6 @@
         font-size: 1rem;
       }
     }
-
   </style>
 </head>
 
@@ -128,7 +128,7 @@
     <p>Seu acesso será liberado automaticamente.</p>
 
     <p style="margin-top: 10px; font-weight: 600; color: #003d82;">
-      Redirecionando em <span id="contador">30</span> segundos...
+      Redirecionando em <span id="contador">20</span> segundos...
     </p>
 
     <div class="loader"></div>
@@ -142,7 +142,7 @@
       const continueUrl = params.get("user_continue_url") 
         || "https://urcaenergia.com";
 
-      let tempo = 30;
+      let tempo = 20;
       const contador = document.getElementById("contador");
 
       setInterval(() => {
@@ -156,7 +156,7 @@
         } else {
           window.location.href = continueUrl;
         }
-      }, 30000); // 30 segundos
+      }, 20000); // 20 segundos
     });
   </script>
 
