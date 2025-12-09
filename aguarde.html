@@ -1,128 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Acesso Liberado - Grupo Urca Energia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acesso Liberado - Grupo Urca Energia</title>
+  <link rel="icon" href="logo.png?v=2" type="image/png" />
+  <link rel="shortcut icon" href="logo.png?v=2" type="image/png" />
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body, html {
-            width: 100%;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.10);
-            z-index: 2;
-        }
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
 
-        /* AQUI ESTÁ O AJUSTE QUE VOCÊ PRECISAVA */
-        .container {
-            position: relative;
-            z-index: 3;
-            width: 90%;
-            max-width: 420px;
-            padding: 35px;
-            border-radius: 18px;
+    /* IGUAL AO INDEX */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.1); /* IGUAL AO INDEX */
+      z-index: 2;
+    }
 
-            /* Mesma opacidade e blur do index */
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+    /* IGUAL AO INDEX */
+    .message-box {
+      position: relative;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.2); /* MESMA OPACIDADE */
+      backdrop-filter: blur(6px);           /* MESMO BLUR */
+      border-radius: 14px;
+      padding: 40px 30px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* idêntico ao index */
+      color: #1a1a1a;
+    }
 
-            text-align: center;
-            color: #003d7a;
-        }
+    .logo {
+      max-width: 150px;
+      margin: 0 auto 20px;
+      display: block;
+    }
 
-        .logo {
-            width: 120px;
-            margin-bottom: 15px;
-        }
+    h1 {
+      color: #003d82;
+      margin-bottom: 15px;
+      font-size: 2rem;
+      font-weight: 700;
+    }
 
-        h2 {
-            font-size: 26px;
-            margin-bottom: 10px;
-            color: #003d7a;
-        }
+    p {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
 
-        p {
-            font-size: 15px;
-            margin-bottom: 15px;
-            color: #003d7a;
-        }
+    .loader {
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top: 6px solid #FF8C00;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto 0;
+    }
 
-        .loader {
-            border: 5px solid rgba(255,255,255,0.4);
-            border-top: 5px solid orange;
-            border-radius: 50%;
-            width: 38px;
-            height: 38px;
-            animation: spin 1.1s linear infinite;
-            margin: 10px auto 0;
-        }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    @media (max-width: 520px) {
+      .message-box {
+        padding: 30px 25px;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
+  <video autoplay muted loop playsinline>
+    <source src="background-video.mp4" type="video/mp4" />
+  </video>
 
-    <video autoplay muted loop>
-        <source src="fundo.webm" type="video/webm">
-    </video>
+  <div class="overlay"></div>
 
-    <div class="overlay"></div>
+  <div class="message-box">
+    <img src="logo.png?v=2" alt="Logo Grupo Urca Energia" class="logo" />
 
-    <div class="container">
-        <img src="logo.png" class="logo">
+    <h1>Acesso Liberado</h1>
+    <p>Você finalizou o preenchimento com sucesso.</p>
+    <p>Seu acesso será liberado automaticamente.</p>
 
-        <h2>Acesso Liberado</h2>
+    <p style="margin-top: 10px; font-weight: 600; color: #003d82;">
+      Redirecionando em <span id="contador">30</span> segundos...
+    </p>
 
-        <p>Você finalizou o preenchimento com sucesso.<br>
-        Em instantes você será redirecionado e seu acesso será liberado automaticamente.</p>
+    <div class="loader"></div>
+  </div>
 
-        <div class="loader"></div>
-    </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
 
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const baseGrantUrl = params.get("base_grant_url");
-            const continueUrl = params.get("user_continue_url") || "https://urcaenergia.com";
+      const baseGrantUrl = params.get("base_grant_url");
+      const continueUrl = params.get("user_continue_url") 
+        || "https://urcaenergia.com";
 
-            setTimeout(() => {
-                if (baseGrantUrl) {
-                    window.location.href = `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
-                } else {
-                    window.location.href = continueUrl;
-                }
-            }, 30000); // 30 segundos
-        });
-    </script>
+      let tempo = 30;
+      const contador = document.getElementById("contador");
+
+      setInterval(() => {
+        tempo--;
+        contador.textContent = tempo;
+      }, 1000);
+
+      setTimeout(() => {
+        if (baseGrantUrl) {
+          window.location.href = `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
+        } else {
+          window.location.href = continueUrl;
+        }
+      }, 30000); // 30 segundos
+    });
+  </script>
 
 </body>
 </html>
