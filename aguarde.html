@@ -117,16 +117,14 @@
         const baseGrantUrl = params.get("base_grant_url");
         const continueUrl = params.get("user_continue_url") || "https://urcaenergia.com/";
 
-        // CORREÇÃO DE TEMPO: 10 segundos (10000 milissegundos )
-        setTimeout(() => {
+        // TEMPO ORIGINAL DE 30 SEGUNDOS MANTIDO
+        setTimeout(( ) => {
             if (baseGrantUrl) {
-                // Esta é a lógica que libera o acesso no seu hotspot
                 window.location.href = `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
             } else {
-                // Redirecionamento simples se não houver baseGrantUrl
                 window.location.href = continueUrl;
             }
-        }, 10000); // 10 segundos
+        }, 30000); // 30 segundos
     });
   </script>
 </body>
