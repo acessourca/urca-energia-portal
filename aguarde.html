@@ -4,50 +4,93 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Acesso Liberado - Grupo Urca Energia</title>
-  <link rel="icon" href="logo.png" type="image/png" />
-  <link rel="shortcut icon" href="logo.png" type="image/png" />
+  <link rel="icon" href="logo.png?v=2" type="image/png" />
+  <link rel="shortcut icon" href="logo.png?v=2" type="image/png" />
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     body {
-      display: flex; justify-content: center; align-items: center;
-      overflow: hidden; position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
+    /* Vídeo de fundo igual ao index */
     video {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%; object-fit: cover; z-index: 1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
     }
 
-    /* 🟦 Mesmo overlay e opacidade do index */
     .overlay {
       position: fixed;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.5); /* 50% — igual ao index */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.1);
       z-index: 2;
     }
 
+    /* Caixa com a mesma opacidade do index */
     .message-box {
-      position: relative; z-index: 3;
-      background: rgba(255, 255, 255, 0.82); /* mantém o mesmo estilo translúcido */
-      max-width: 480px;
+      position: relative;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.2); /* igual ao index */
+      backdrop-filter: blur(6px);           /* igual ao index */
       padding: 40px 30px;
       border-radius: 14px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-      text-align: center; color: #1a1a1a;
-      backdrop-filter: blur(4px);
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      color: #1a1a1a;
     }
 
-    .logo { max-width: 150px; margin: 0 auto 20px; display: block; }
-    h1 { color: #003d82; margin-bottom: 20px; font-size: 2rem; }
-    p { font-size: 1.15rem; margin-bottom: 10px; color: #2a2a2a; }
+    .logo {
+      max-width: 150px;
+      margin: 0 auto 20px;
+      display: block;
+    }
 
+    h1 {
+      color: #003d82;
+      margin-bottom: 15px;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+
+    /* Loader igual estilo Urca */
     .loader {
-      border: 6px solid #f3f3f3;
+      border: 6px solid rgba(255, 255, 255, 0.3);
       border-top: 6px solid #FF8C00;
       border-radius: 50%;
-      width: 40px; height: 40px;
+      width: 50px;
+      height: 50px;
       animation: spin 1s linear infinite;
       margin: 20px auto 0;
     }
@@ -55,10 +98,22 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    @media (max-width: 520px) {
+      .message-box {
+        padding: 30px 25px;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
-<body>
 
+<body>
   <video autoplay muted loop playsinline>
     <source src="background-video.mp4" type="video/mp4" />
   </video>
@@ -66,10 +121,16 @@
   <div class="overlay"></div>
 
   <div class="message-box">
-    <img src="logo.png" class="logo" />
+    <img src="logo.png?v=2" alt="Logo Grupo Urca Energia" class="logo" />
+
     <h1>Acesso Liberado</h1>
     <p>Você finalizou o preenchimento com sucesso.</p>
-    <p>Estamos validando seu acesso...</p>
+    <p>Seu acesso será liberado automaticamente.</p>
+
+    <p style="margin-top: 10px; font-weight: 600; color: #003d82;">
+      Redirecionando em <span id="contador">20</span> segundos...
+    </p>
+
     <div class="loader"></div>
   </div>
 
@@ -79,7 +140,15 @@
 
       const baseGrantUrl = params.get("base_grant_url");
       const continueUrl = params.get("user_continue_url") 
-                          || "https://urcaenergia.com";
+        || "https://urcaenergia.com";
+
+      let tempo = 20;
+      const contador = document.getElementById("contador");
+
+      setInterval(() => {
+        tempo--;
+        contador.textContent = tempo;
+      }, 1000);
 
       setTimeout(() => {
         if (baseGrantUrl) {
@@ -87,8 +156,9 @@
         } else {
           window.location.href = continueUrl;
         }
-      }, 10000);
+      }, 20000); // 20 segundos
     });
   </script>
+
 </body>
 </html>
