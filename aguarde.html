@@ -20,18 +20,23 @@
       width: 100%; height: 100%; object-fit: cover; z-index: 1;
     }
 
+    /* 🟦 Mesmo overlay e opacidade do index */
     .overlay {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.3); z-index: 2;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* 50% — igual ao index */
+      z-index: 2;
     }
 
     .message-box {
       position: relative; z-index: 3;
-      background: white; max-width: 480px;
-      padding: 40px 30px; border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82); /* mantém o mesmo estilo translúcido */
+      max-width: 480px;
+      padding: 40px 30px;
+      border-radius: 14px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
       text-align: center; color: #1a1a1a;
+      backdrop-filter: blur(4px);
     }
 
     .logo { max-width: 150px; margin: 0 auto 20px; display: block; }
@@ -78,13 +83,11 @@
 
       setTimeout(() => {
         if (baseGrantUrl) {
-          // Redirecionamento padrão de captive portal
           window.location.href = `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
         } else {
-          // Fallback caso esteja fora do ambiente de autenticação
           window.location.href = continueUrl;
         }
-      }, 10000); // 10 segundos
+      }, 10000);
     });
   </script>
 </body>
