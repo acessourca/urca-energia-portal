@@ -25,7 +25,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      /* REMOVIDO: padding: 20px; */
       position: relative;
       overflow: hidden;
     }
@@ -46,7 +46,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.1  ); /* Fundo escuro leve para o vídeo */
+      background: rgba(0, 0, 0, 0.1 ); /* Fundo escuro leve para o vídeo */
       z-index: 2;
     }
 
@@ -164,7 +164,8 @@
     @media (max-width: 520px) {
       .container {
         padding: 30px 25px;
-      } .subtitle {
+      }
+      .subtitle {
         font-size: 1.1rem;
         margin-bottom: 20px;
       }
@@ -182,26 +183,25 @@
     <img src="logo.png?v=2" alt="Logo Grupo Urca Energia" class="logo" />
     <p class="subtitle">Preencha o formulário para liberar o acesso à internet.</p>
 
-    <!-- CORREÇÃO DE LIBERAÇÃO DE REDE: O formulário envia os dados para o hotspot e depois redireciona para aguarde.html -->
-    <form id="visitForm" method="POST" action="aguarde.html">
+    <form id="visitForm" onsubmit="handleSubmit(event)">
       <div class="input-group">
         <i class="fas fa-user"></i>
-        <input type="text" id="nome" name="nome" placeholder="Nome completo" required />
+        <input type="text" id="nome" placeholder="Nome completo" required />
       </div>
 
       <div class="input-group">
         <i class="fas fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="E-mail" required />
+        <input type="email" id="email" placeholder="E-mail" required />
       </div>
 
       <div class="input-group">
         <i class="fas fa-phone"></i>
-        <input type="tel" id="telefone" name="telefone" placeholder="Telefone" required />
+        <input type="tel" id="telefone" placeholder="Telefone" required />
       </div>
 
       <div class="input-group">
         <i class="fas fa-comment"></i>
-        <textarea id="motivo" name="motivo" placeholder="Motivo da visita" required></textarea>
+        <textarea id="motivo" placeholder="Motivo da visita" required></textarea>
       </div>
 
       <button type="submit">Enviar e Acessar</button>
@@ -210,6 +210,11 @@
     <footer>© 2025 Grupo Urca Energia • Todos os direitos reservados</footer>
   </div>
 
-  <!-- O JavaScript que impedia o envio do formulário foi removido -->
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      window.location.href = 'aguarde.html' + window.location.search;
+    }
+  </script>
 </body>
 </html>
