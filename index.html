@@ -7,6 +7,7 @@
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="shortcut icon" href="logo.png" type="image/png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  
   <style>
     * {
       margin: 0;
@@ -52,7 +53,8 @@
     .container {
       position: relative;
       z-index: 3;
-      background: white;
+      background: rgba(0, 61, 130, 0.15); /* azul claro transparente */
+      backdrop-filter: blur(6px); /* efeito moderno */
       max-width: 480px;
       width: 100%;
       padding: 40px 35px;
@@ -170,6 +172,7 @@
     }
   </style>
 </head>
+
 <body>
   <video autoplay muted loop playsinline>
     <source src="background-video.mp4" type="video/mp4" />
@@ -180,25 +183,31 @@
   <div class="container">
     <img src="logo.png" alt="Logo Grupo Urca Energia" class="logo" />
     <p class="subtitle">Preencha o formulário para liberar o acesso à internet.</p>
+
     <form id="visitForm" onsubmit="handleSubmit(event)">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" id="nome" placeholder="Nome completo" required />
       </div>
+
       <div class="input-group">
         <i class="fas fa-envelope"></i>
         <input type="email" id="email" placeholder="E-mail" required />
       </div>
+
       <div class="input-group">
         <i class="fas fa-phone"></i>
         <input type="tel" id="telefone" placeholder="Telefone" required />
       </div>
+
       <div class="input-group">
         <i class="fas fa-comment"></i>
         <textarea id="motivo" placeholder="Motivo da visita" required></textarea>
       </div>
+
       <button type="submit">Enviar e Acessar</button>
     </form>
+
     <footer>© 2025 Grupo Urca Energia • Todos os direitos reservados</footer>
   </div>
 
