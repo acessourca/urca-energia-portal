@@ -8,9 +8,6 @@
   <link rel="shortcut icon" href="logo.png?v=2" type="image/png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   
-  <!-- CORREÇÃO DE REDIRECIONAMENTO: Redireciona para urcaenergia.com após 15 segundos -->
-  <meta http-equiv="refresh" content="15; url=https://urcaenergia.com/" />
-  
   <style>
     * {
       margin: 0;
@@ -103,10 +100,16 @@
     <footer>© 2025 Grupo Urca Energia • Todos os direitos reservados</footer>
   </div>
 
-  <!-- CORREÇÃO DE SCROLL: Força o scroll para o topo -->
+  <!-- CORREÇÃO DE SCROLL E REDIRECIONAMENTO -->
   <script>
     window.onload = function() {
+        // 1. Força o scroll para o topo
         window.scrollTo(0, 0);
+
+        // 2. Redireciona após 15 segundos (15000 milissegundos)
+        setTimeout(function() {
+            window.location.href = 'https://urcaenergia.com/';
+        }, 15000 );
     };
   </script>
 </body>
