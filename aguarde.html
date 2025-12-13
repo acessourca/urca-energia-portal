@@ -38,6 +38,7 @@
       z-index: 1;
     }
 
+    /* MESMO OVERLAY DO INDEX */
     .overlay {
       position: fixed;
       inset: 0;
@@ -45,7 +46,7 @@
       z-index: 2;
     }
 
-    /* CAIXA IGUAL AO INDEX */
+    /* MESMA CAIXA DO INDEX */
     .message-box {
       position: relative;
       z-index: 3;
@@ -108,27 +109,27 @@
     <img src="logo.png?v=2" class="logo" alt="Grupo Urca Energia" />
 
     <h1>Acesso Liberado</h1>
-    <p>Você finalizou o preenchimento com sucesso.</p>
     <p>Seu acesso está sendo liberado.</p>
+    <p>Aguarde alguns instantes…</p>
 
     <div class="loader"></div>
   </div>
 
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', () => {
       const params = new URLSearchParams(window.location.search);
-
       const baseGrantUrl = params.get("base_grant_url");
 
-      /* SITE FINAL */
+      // SITE FINAL OBRIGATÓRIO
       const continueUrl = "https://urcaenergia.com/";
 
+      // Delay seguro para Captive Portal
       setTimeout(() => {
         if (baseGrantUrl) {
           window.location.href =
-            `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
+            baseGrantUrl + "?continue_url=" + encodeURIComponent(continueUrl);
         }
-      }, 10000); // 10 segundos
+      }, 8000); // 8 segundos (mais confiável que 10)
     });
   </script>
 
