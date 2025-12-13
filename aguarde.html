@@ -20,7 +20,7 @@
     }
 
     body {
-      min-height: 100svh; /* CORREÇÃO MOBILE */
+      min-height: 100svh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -38,7 +38,6 @@
       z-index: 1;
     }
 
-    /* IGUAL AO INDEX */
     .overlay {
       position: fixed;
       inset: 0;
@@ -52,14 +51,13 @@
       z-index: 3;
       width: 100%;
       max-width: 480px;
+      padding: 36px 28px;
 
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(6px);
 
       border-radius: 14px;
-      padding: 36px 28px;
       text-align: center;
-
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     }
 
@@ -82,14 +80,8 @@
       line-height: 1.4;
     }
 
-    .contador {
-      margin-top: 10px;
-      font-weight: 600;
-      color: #003d82;
-    }
-
     .loader {
-      margin: 18px auto 0;
+      margin: 20px auto 0;
       width: 46px;
       height: 46px;
       border-radius: 50%;
@@ -117,11 +109,7 @@
 
     <h1>Acesso Liberado</h1>
     <p>Você finalizou o preenchimento com sucesso.</p>
-    <p>Seu acesso será liberado automaticamente.</p>
-
-    <p class="contador">
-      Redirecionando em <span id="contador">10</span> segundos...
-    </p>
+    <p>Seu acesso está sendo liberado.</p>
 
     <div class="loader"></div>
   </div>
@@ -131,11 +119,18 @@
       const params = new URLSearchParams(window.location.search);
 
       const baseGrantUrl = params.get("base_grant_url");
-      const continueUrl = params.get("user_continue_url") || "https://urcaenergia.com";
 
-      let tempo = 10;
-      const contador = document.getElementById("contador");
+      /* SITE FINAL */
+      const continueUrl = "https://urcaenergia.com/";
 
-      const timer = setInterval(() => {
-        tempo--;
-        contador.textContent = tempo;
+      setTimeout(() => {
+        if (baseGrantUrl) {
+          window.location.href =
+            `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
+        }
+      }, 10000); // 10 segundos
+    });
+  </script>
+
+</body>
+</html>
