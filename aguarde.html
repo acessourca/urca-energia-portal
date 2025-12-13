@@ -3,76 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Acesso Liberado</title>
-  <link rel="icon" type="image/svg+xml" href="https://acessogv.github.io/logogv/favicon.svg" />
+  <title>Acesso Liberado - Grupo Urca Energia</title>
+  <link rel="icon" href="logo.png?v=2" type="image/png" />
+  <link rel="shortcut icon" href="logo.png?v=2" type="image/png" />
+
   <style>
-    body, html {
-      height: 100%;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f7f9fa;
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      color: #1a1a1a;
-      padding: 20px;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Vídeo de fundo igual ao index */
+    video {
+      position: fixed;
+      top: 0;
+@@ -38,29 +39,28 @@
+      z-index: 1;
+    }
+
+    /* IGUAL AO INDEX */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.1); /* IGUAL AO INDEX */
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+
+    /* IGUAL AO INDEX */
+    /* Caixa com a mesma opacidade do index */
     .message-box {
-      background: #fff;
+      position: relative;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.2); /* MESMA OPACIDADE */
+      backdrop-filter: blur(6px);           /* MESMO BLUR */
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.2); /* igual ao index */
+      backdrop-filter: blur(6px);           /* igual ao index */
       padding: 40px 30px;
       border-radius: 14px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
       max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* idêntico ao index */
+      color: #1a1a1a;
     }
-    h1 {
-      color: #4d7a53;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 1.15rem;
-      line-height: 1.6;
+
+@@ -84,6 +84,7 @@
       margin-bottom: 10px;
     }
-    .loader {
-      border: 6px solid #f3f3f3;
-      border-top: 6px solid #007a33;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto 0;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const baseGrantUrl = params.get("base_grant_url");
-      const continueUrl = params.get("user_continue_url") || "https://gasverde.com.br";
 
-      if (baseGrantUrl) {
-        const grantRedirect = `${baseGrantUrl}?continue_url=${encodeURIComponent(continueUrl)}`;
-        setTimeout(() => {
-          window.location.href = grantRedirect;
-        }, 10000);
-      } else {
-        setTimeout(() => {
-          window.location.href = continueUrl;
-        }, 10000);
+    /* Loader igual estilo Urca */
+    .loader {
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top: 6px solid #FF8C00;
+@@ -109,7 +110,6 @@
+        font-size: 1rem;
       }
+    }
+
+  </style>
+</head>
+
+@@ -128,7 +128,7 @@
+    <p>Seu acesso será liberado automaticamente.</p>
+
+    <p style="margin-top: 10px; font-weight: 600; color: #003d82;">
+      Redirecionando em <span id="contador">30</span> segundos...
+      Redirecionando em <span id="contador">20</span> segundos...
+    </p>
+
+    <div class="loader"></div>
+@@ -142,7 +142,7 @@
+      const continueUrl = params.get("user_continue_url") 
+        || "https://urcaenergia.com";
+
+      let tempo = 30;
+      let tempo = 20;
+      const contador = document.getElementById("contador");
+
+      setInterval(() => {
+@@ -156,9 +156,9 @@
+        } else {
+          window.location.href = continueUrl;
+        }
+      }, 30000); // 30 segundos
+      }, 20000); // 20 segundos
     });
   </script>
-</head>
-<body>
-  <div class="message-box" role="main">
-    <h1>Acesso Liberado</h1>
-    <p>Você finalizou o preenchimento com sucesso.</p>
-    <p>Em instantes você será redirecionado e seu acesso será liberado automaticamente.</p>
-    <div class="loader" aria-label="Carregando..."></div>
-  </div>
+
 </body>
 </html>
